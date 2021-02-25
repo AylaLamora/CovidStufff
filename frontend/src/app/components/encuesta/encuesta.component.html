@@ -1,0 +1,203 @@
+<app-sidebar></app-sidebar>
+  
+<div class="contenedor animated fadeIn fast">
+
+  <h2>Agregar caso</h2>
+  
+  <form  [formGroup]="forma" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="_id">
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="nombre" >Nombre:</label>
+      <input type="text"
+             class="form-control"
+             id="nombre" 
+             placeholder="Pepe"
+             formControlName="nombre"
+             [class.is-invalid]="nombreNoValido" 
+             >
+      <small *ngIf="nombreNoValido" class="text-danger">Se requiere el nombre</small>
+
+    </div>
+    <div class="form-group col-md-3">
+      
+      <input type="radio"
+             class="form-control"
+             id="sexo"
+             formControlName="sexo" checked
+             ><label for="sexo" >Hombre:</label></div>
+             <div class="form-group col-md-3">
+             <input type="radio"
+             class="form-control"
+             id="sexo"
+             formControlName="sexo"
+             ><label for="sexo" >Mujer:</label>
+
+    </div>
+
+    
+
+    <div class="form-group col-md-6">
+      <label for="direccion" >Dirección:</label>
+      <input type="text"
+             class="form-control"
+             placeholder="Ejem: Calle del rio #123" 
+             id="direccion"
+             formControlName="direccion"
+             [class.is-invalid]="direccionNoValido" 
+             >
+      <small *ngIf="direccionNoValido" class="text-danger">Se requiere la dirección</small>
+
+    </div>
+    <div class="form-group col-md-3">
+      
+      <input type="radio"
+             class="form-control"
+             id="estadocivil"
+             formControlName="estadocivil" checked
+             ><label for="direccion" >Casado:</label></div>
+             <div class="form-group col-md-3">
+             <input type="radio"
+             class="form-control"
+             id="estadocivil"
+             formControlName="estadocivil"
+             ><label for="direccion" >Soltero:</label>
+
+    </div>
+    <div class="form-group col-md-6">
+      <label for="salud" >Salud Actual:</label>
+      <select 
+             class="form-control"
+             id="salud"
+             formControlName="salud"
+             >
+            <option value=0>Buena</option>
+            <option value=1>Regular</option>
+            <option value=2>Mala</option>
+          </select>
+      <small *ngIf="direccionNoValido" class="text-danger">Se requiere la dirección</small>
+
+    </div>
+    <div class="form-group col-md-6">
+      <label for="edad" >EDAD:</label>
+      <input type="number"
+             class="form-control"
+             id="edad"
+             formControlName="edad"
+             >
+
+    </div>
+    <div class="form-group col-md-12">
+      <label for="fecha" >Fecha:</label>
+      <input type="date"
+             class="form-control"
+             id="fecha"
+             formControlName="fecha"
+             disabled>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="condiciones" >Condiciones Pre-existentes:</label>
+      
+    </div>
+    <div class="form-group col-md-2">
+      <label for="condiciones" >Diabetes</label>
+      <input type="checkbox"
+             class="form-control"
+             id="diabetes"
+             formControlName="diabetes"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="Hiper" >Hiper tension</label>
+      <input type="checkbox"
+             class="form-control"
+             id="Hiper"
+             formControlName="Hiper"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="Asma" >Asma</label>
+      <input type="checkbox"
+             class="form-control"
+             id="Asma"
+             formControlName="Asma"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Mal cardiaco</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-12">
+      <label for="fecha" >Sintomas:</label>
+      
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Tos seca</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Dolor de cabeza</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Falta de olfato</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Dolor de garganta</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Dolor Muscular</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="cardiaco" >Perdida del gusto</label>
+      <input type="checkbox"
+             class="form-control"
+             id="cardiaco"
+             formControlName="cardiaco"
+             >
+    </div>
+
+
+    
+
+  </div>
+
+    <div class="form-row centro">
+    <button type="button" class=" reset" (click)="resetForm()" value="Reset">Reset</button>
+    <button style="margin-left: 15%;"
+            type="submit"
+            class="reset"
+            [disabled]="!forma.valid"
+            [class.opaco]="!forma.valid">Guardar</button>
+    </div>
+  </form>
+
+</div>

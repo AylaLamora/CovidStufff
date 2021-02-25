@@ -1,0 +1,58 @@
+.login-page {
+    background: -webkit-linear-gradient(top,#95d2f5, #f7f7f7);
+    height: auto;
+    margin: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.error-page {
+    background-color: rgb(236, 236, 236);
+    height: auto;
+    margin: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.registro-page {
+    background: -webkit-linear-gradient(top,#95d2f5, #f7f7f7);
+    height: auto;
+    margin: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.principal-page{
+    background: -webkit-linear-gradient(top,#95d2f5, #f7f7f7);
+    height: auto;
+    margin: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+body {     background: -webkit-linear-gradient(top,#95d2f5, #f7f7f7);
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+    .reset{
+        transition: transform .2s; 
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        letter-spacing: 1px;
+        background: #49d2eb ;
+        padding: 10px 10px;
+        border-radius: 5px;
+        font-size: 2.5vh;
+      }
+      .reset:hover{
+        transform: scale(1.2);
+        background:  #1776c4 ;
+      
+      }
+      
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
