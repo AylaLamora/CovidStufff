@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 
 //Componentes
 import { FilterPipe } from './pipes/filter.pipe';
@@ -72,7 +73,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     MatTableModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ChartsModule
   ],
   providers: [
     AuthGuard,

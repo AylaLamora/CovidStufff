@@ -1,6 +1,5 @@
 <div class="login animated fadeIn fast">
   <img src="../assets/img/LOGO2.png">
-  <br><br>
 
       <h2>Iniciar sesión</h2>
 
@@ -12,6 +11,12 @@
         <div class="inputlogin  mui-textfield mui-textfield--float-label">
           <input type="{{contrasena}}" [(ngModel)]="user.password" name="password" required="">
           <label>Contraseña:</label>
+        </div>
+        
+        
+        <div class="inputlogin  mui-textfield mui-textfield--float-label">
+          <input type="{{contrasena}}" [(ngModel)]="word" name="permisos" >
+          <label>Admin:</label>
         </div>
         <label class="container-checkbox1">
           <input (click)="monstrarContrasena(!flag)" type="checkbox" >

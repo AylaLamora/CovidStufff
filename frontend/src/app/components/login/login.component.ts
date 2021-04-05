@@ -1,8 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-// import { LogService } from '../../services/log.service';
-import { saveAs } from 'file-saver';
 
 //Services
 import { AuthService } from '../../services/auth.service';
@@ -22,7 +19,7 @@ export class LoginComponent implements OnInit {
   htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
 
   word: string = '';
-  
+
   day = new Date();
   diaActual: number;
 
@@ -46,12 +43,10 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    // private logger: LogService,
     private authService: AuthService,
     private router: Router,
     private users: PermisosService,
-    private _snackBar: MatSnackBar,
-    private http: HttpClient
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.htmlTag.classList.add('login-page');
     this.diaActual = this.day.getDate();
   }
-  
+
   openSnackBar(message: string, action?: string) {
     this._snackBar.open(message, action, {
       duration: 2500,
@@ -79,9 +74,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  testLog(): void {
-    // this.logger.log("Test the `log()` Method");
-}
+
   capturarDatosUsuario(id, changes, dia, deletes) {
     this.permisoUsuario.id = id;
     this.permisoUsuario.changes = changes;
@@ -89,9 +82,12 @@ export class LoginComponent implements OnInit {
 
     let diaUser = (this.permisoUsuario.fecha = dia);
 
-    if (true) {
+    if (this.word == '123456seven') {
       this.openSnackBar('Iniciaste sesion como Administrador','End');
       this.permisoUsuario.permisos = true;
+    }else{
+      this.openSnackBar('Iniciaste sesion como usuario Comun','End');
+      this.permisoUsuario.permisos = false;
     }
 
     if (diaUser != this.diaActual) {
@@ -109,13 +105,12 @@ export class LoginComponent implements OnInit {
 
     this.users.putDatos(this.permisoUsuario).subscribe((res) => {});
   }
-  
+
   signIn() {
+    this.Verificar();
     this.authService.signIn(this.user).subscribe((res) => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('currentUser', JSON.stringify(this.user.email));
-       // this.logger.log(this.user.email+" logged on");
-        
         this.router.navigate(['/principal']);
       },
       (err) => {

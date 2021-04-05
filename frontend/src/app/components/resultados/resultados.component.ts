@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { ChartOptions, ChartType, ChartDataSets,  } from 'chart.js'; // Librerias de gráfico
+import { Label } from 'ng2-charts';
 
 //Services
 import { BebidasService } from '../../services/bebidas.service';
@@ -23,32 +25,93 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [DatosInventarioService, DatosClientesService, BebidasService],
 })
 export class ResultadosComponent implements OnInit {
-  idCliente: string;
-  selectedid: string = '';
-  selectedCliente: string = '';
-  direccion: string;
-  nombreinv: string;
 
-  categoria = '';
-  articulo = '';
-  mlText = '';
-  mililitros = null;
-  cod = null;
+  // INICIO :grafico
+  public barChartOptions: ChartOptions = {
+    responsive : true,
+    scales     : {
+      xAxes: [{
+        ticks: {
+          fontColor: "white",
+          fontSize: 14,
+          stepSize: 1,
+          beginAtZero: true
+      }}],
+      yAxes: [{
+        ticks: {
+        fontColor: "white",
+        fontSize: 14,
+        stepSize: 1,
+        beginAtZero: true
+}}]},
+    legend     : {
+                    labels   : {fontColor: 'white'},
+                    position : 'top',
+                 },
+
+  }
+  public barChartLabels: Label[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
+  public barChartType: ChartType = 'line';
+  public barChartLegend = false;
+  public chartColors: Array<any> = [
+    { // first color
+      backgroundColor: 'rgba(225, 255, 255, 0)',
+      borderColor: 'rgba(225, 255, 255, 1)',
+      pointBackgroundColor: 'rgba(225, 255, 255, 1)',
+      pointBorderColor: '#ffffff',
+      pointHoverBackgroundColor: '#ff0000',
+      pointHoverBorderColor: 'rgba(225, 0, 0, 0)'
+    },
+    { // second color
+      backgroundColor: 'rgba(225, 10, 24, 0)',
+      borderColor: 'rgba(96, 125, 139, 1)',
+      pointBackgroundColor: 'rgba(96, 125, 139, 1)',
+      pointBorderColor: '#607d8b',
+      pointHoverBackgroundColor: '#ff0000',
+      pointHoverBorderColor: 'rgba(225, 0, 0, 0)'
+    }
+  ];
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Encuesta 1' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Encuesta 2' }
+  ];
+
+  //PIE
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top',
+      labels: {
+        fontColor: 'white', // legend color (can be hexadecimal too)
+      },
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          const label = ctx.chart.data.labels[ctx.dataIndex];
+          return label;
+        },
+      },
+    }
+  };
+  public pieChartLabels: Label[] = [['Riesgo'], ['Posible portador'], ['Sin riesgo']];
+  public pieChartData: number[] = [300, 500, 100];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(96, 125, 139, 1)',  'rgba(63, 81, 181, 1)', 'rgba(255, 193, 7, 1)'],
+    },
+  ];
+  // FIN : grafico
 
   constructor(
     private router: Router,
-    public datosInventarioService: DatosInventarioService,
-    public datosClientesService: DatosClientesService,
-    public bebidaService: BebidasService,
     private _snackBar: MatSnackBar,
     private dialogo: MatDialog
   ) {}
 
   ngOnInit() {
-    this.resetFormInv();
-    this.resetFormCliente();
-    this.refrescarListaInventario();
-    this.refrescarListaClientes();
   }
 
   openSnackBar(message: string, action?: string) {
@@ -59,105 +122,12 @@ export class ResultadosComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
-    this.dialogo
-      .open(DialogComponent, {
-        data: `El inventario del cliente que estas guardando es: ${form.value.nombre} Estas seguro que deseas guardarlo?`,
-      })
-      .afterClosed().subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-          form.value.idCliente = this.idCliente;
-          form.value.presentacion = this.mililitros;
-          form.value.nombreCli = form.value.nombre;
-          form.value.codBebida = this.cod;
-          form.value.ventas = 0;
-          form.value.compras = 0;
-          form.value.invTeorico = form.value.invInicial;
-          this.datosInventarioService.postDatos(form.value).subscribe((res) => {
-            this.openSnackBar('Se Guardo Correctamente', 'End');
-            this.resetFormInv();
-          });
-        } else {
-          this.openSnackBar('Misión Abortada', 'End');
-        }
-      });
-
-  }
-
-  refrescarListaInventario() {
-    this.datosInventarioService.getDatosList().subscribe((res) => {
-      this.datosInventarioService.DatosInventario = res as DatosInventario[];
-    });
-  }
-
-  /* Datos del cliente */
-  refrescarListaClientes() {
-    this.datosClientesService.getDatosList().subscribe((res) => {
-      this.datosClientesService.DatosClientes = res as DatosClientes[];
-    });
-  }
-
-  clientSearch(name: string, form) {
-    for (let inv of this.datosClientesService.DatosClientes) {
-      if (inv.nombre == name) {
-        form.value.idCliente = inv._id;
-        this.idCliente = inv._id;
-      }
+  public chartClicked(e:any):void {
+    console.log(e);
     }
-  }
-
-  resetFormCliente(form?: NgForm) {
-    if (form) form.reset();
-    this.datosClientesService.selectClientes = {
-      _id: '',
-      nombre: '',
-      razonSocial: '',
-      rfc: '',
-      direccion: '',
-      colonia: '',
-      estado: '',
-      cp: null,
-      correo: '',
-      telefono: null,
-      inventario: [],
-      recetas: [],
-    };
-  }
-
-  resetFormInv(form?: NgForm) {
-    if (form) form.reset();
-    this.datosInventarioService.selectInventario = {
-      _id: '',
-      categoria: '',
-      nombreBebida: '',
-      presentacion: '',
-      invInicial: null,
-      compras: null,
-      ventas: null,
-      invFinal: null,
-      invTeorico: null,
-      diferencia: null,
-      codBebida: '',
-      idCliente: '',
-      nombreCli: '',
-      clientes:''
-    };
-    this.mlText = '';
-    this.cod = null;
-  }
-
-  getCategoria(category: string, form: NgForm) {
-    this.categoria = category;
-  }
-  getArticulo(art: string, form: NgForm) {
-    this.articulo = art; //Nombre de la bebida
-
-    for (let drink of this.bebidaService.info) {
-      if (art == drink.nombre) {
-        this.mililitros = drink.ml;
-        this.cod = drink.codigo;
-        this.mlText = `${drink.ml} ML`;
-      }
+    
+    public chartHovered(e:any):void {
+    console.log(e);
     }
-  }
+
 } //Aqui cierra TODO

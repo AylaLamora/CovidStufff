@@ -2,76 +2,47 @@
   
 <div class="contenedor animated fadeIn fast">
 
-  <h2>Captura de Inventario Inicial</h2>
-    <form #inventarioForm="ngForm" (ngSubmit)="onSubmit(inventarioForm)">
-      <div class="form-group col-md-7 centro">
-        <label for="inputState">Cliente: </label>
-        <input style="margin-left: -3.5%;" type="text" list="clientes" class="form-control busqueda" name="nombre"
-        [(ngModel)]='selectedCliente' (change)="clientSearch(selectedCliente, inventarioForm)">
-        <datalist  id="clientes">
-          <!-- <select> -->
-            <option  *ngFor="let inventario of datosClientesService.DatosClientes" [value]="inventario.nombre"></option>  
-          <!-- </select> -->
-        </datalist>
-      </div>
-
-      <div class="form-group">
-        <input type="hidden" class="form-control"  placeholder="idCliente" name="idCliente" [value]="idCliente">
-      </div>
-
-      <input type="hidden" name="nombreCli" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.nombreCli">
-
-      <input type="hidden" name="_id" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario._id">
-      
-        <div class="form-group ">
-          <label for="inputState">Categoría:</label>
-            <input id="inputState"list="1" class="form-control" name="categoria" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.categoria"
-            (change)="getCategoria(datosInventarioService.selectInventario.categoria,inventarioForm)">
-            <datalist  id="1">
-              <div *ngFor="let drink of bebidaService.info">
-              <div *ngIf="drink.parent=='categoria'">
-              <option   [value]="drink.nombre"></option>  
-              </div>
+  <h2>Resultados</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card bg-success">
+          <div class="card-body pb-0">
+            <div class="text-value">Grafico de resultados</div>
+            <div>
+              <div class="text-value">Encuesta 1</div>
             </div>
-         
-          </datalist> 
-        </div>
-          
-        <div class="form-group">
-          <label for="inputState">Nombre:</label>
-            <input id="inputState"list="2"  class="form-control" name="nombreBebida" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.nombreBebida"
-            (change)="getArticulo(datosInventarioService.selectInventario.nombreBebida,inventarioForm)">
-            <datalist  id="2">
-                <div *ngFor="let drink of bebidaService.info">
-                <div *ngIf="drink.parent==categoria">
-                <option   [value]="drink.nombre"></option>  
-              </div>
-              </div>
-            
-            </datalist>  
-        </div>
-        <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputState">Presentación:</label>
-            <a class="form-control">{{mlText}}</a>              
-            <input type="hidden" id="inputState" class="form-control" name="presentacion" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.presentacion">
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="inputState">Código:</label>
-            <a class="form-control">{{cod}}</a>              
-            <input type="hidden" id="inputState" class="form-control" name="codBebida" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.codBebida">
+          </div>
+          <div class="chart-wrapper mt-3">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend"></canvas>
+          </div>
         </div>
       </div>
-               
-        <div class="form-group ">
-          <label for="invInicial">Inventario Inicial:</label>
-          <input type="number" class="form-control" id="invInicial" name="invInicial" #name="ngModel" [(ngModel)]="datosInventarioService.selectInventario.invInicial" placeholder="Ejem: 10">
+      <div class="col-md-6">
+        <div class="card bg-primary">
+          <div class="card-body pb-0">
+            <div class="text-value">Comparativa</div>
+            <div> <h3 class="en1">Encuesta 1 | </h3> <h4 class="en2"> Encuesta 2</h4> </div>
+          </div>
+          <div class="chart-wrapper mt-3">
+            <canvas
+              baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors]="chartColors"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+          </div>
         </div>
-
-        <div class="form-row">
-        <button type="button" class="reset" (click)="resetFormInv(inventarioForm)" value="Reset">Reset</button>
-        <button type="button" class="reset"  style="margin-left: 15%;" type="submit">Guardar</button>
-        </div>
-    </form>
+      </div>
+    </div>
 </div>
