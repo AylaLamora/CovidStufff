@@ -2,27 +2,30 @@
 <div class="aaa">
   
 <div class="contenedor animated fadeIn fast">
-    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-interval="10">
-            <img src="../../../assets/img/doc.jpg" class=" centered" alt="...">
-          </div>
-          <div class="carousel-item" data-interval="10">
-            <img src="../../../assets/img/icon.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item" data-interval="20">
-            <img src="../../../assets/img/icon3.png" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <a class="carousel-control-prev"  role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next"  role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+    
+  <ngb-carousel #ngcarousel>
+    <ng-template ngbSlide id="one">
+      <div class="picsum-img-wrapper">
+        <img src="../../../assets/img/doc.jpg" alt="Slide 1">
       </div>
+    </ng-template>
+    <ng-template ngbSlide id="two">
+      <div class="picsum-img-wrapper">
+        <img src="../../../assets/img/icon2.png" alt="Slide 2">
+      </div>
+    </ng-template>
+    <ng-template ngbSlide id="three">
+      <div class="picsum-img-wrapper">
+        <img src="../../../assets/img/doc.jpg" alt="Slide 3">
+      </div>
+    </ng-template>
+    <ng-template ngbSlide id="four">
+      <div class="picsum-img-wrapper">
+        <img src="../../../assets/img/icon2.png" alt="Slide 4">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  
     <br>
     <br>
 
@@ -34,7 +37,9 @@
             La página se encarga meramente de proporcionar estadísticas en base a los datos guardados de los formularios contestados.
             El formulario está compuesto de preguntas diseñadas específicamente para recaudar la información necesaria para combatir al virus.</h3>
         
-</div></div>
+</div>
+</div>
+
 <br>
 
 <div class="footer-clean">

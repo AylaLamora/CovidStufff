@@ -22,7 +22,9 @@ import { Sort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'ngbd-carousel-basic',
   templateUrl: './principal.component.html',
@@ -30,12 +32,33 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [DatosClientesService, DatosInventarioService, RecetasService],
 })
 export class PrincipalComponent implements OnInit {
+  @ViewChild('ngcarousel', { static: true }) ngCarousel: NgbCarousel;
 
-    constructor(
-  ) {
+  ngOnInit() { }
+
+  // Move to specific slide
+  navigateToSlide(item) {
+    this.ngCarousel.select(item);
+    console.log(item)
   }
 
-  ngOnInit() {
+  // Move to previous slide
+  getToPrev() {
+    this.ngCarousel.prev();
   }
 
+  // Move to next slide
+  goToNext() {
+    this.ngCarousel.next();
+  }
+
+  // Pause slide
+  stopCarousel() {
+    this.ngCarousel.pause();
+  }
+
+  // Restart carousel
+  restartCarousel() {
+    this.ngCarousel.cycle();
+  }
 }
