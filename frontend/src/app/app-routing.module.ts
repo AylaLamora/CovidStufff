@@ -30,6 +30,7 @@ const routes: Routes = [
   {path: 'resultados',component:  ResultadosComponent,canActivate:[AuthGuard] },
   {path: 'bebidas',component:  BebidasComponent,canActivate:[AuthGuard] },
   {path: 'ventas',component:  VentasComponent,canActivate:[AuthGuard] },
+  //{path: '#Inter',pathMatch:'full' },
   {path: '', pathMatch:'full', redirectTo:'login' },
   {path: '**',  pathMatch:'full', redirectTo:'error'},
 

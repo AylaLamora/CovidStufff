@@ -1,213 +1,92 @@
-<app-sidebar></app-sidebar>
-<div class="contenedor animated fadeIn fast">
-  <form #inventarioForm="ngForm">
-    <div class="form-group col-md-3">
-      <label for="inputState">Cliente: </label>
-      <input style="margin-left: -3.5%;" type="text" list="clientes" class="form-control busqueda" name="nombre"
-      [(ngModel)]='selectedCliente' (change)="clientSearch(selectedCliente, inventarioForm)" (change)="applyFilter(selectedCliente)">
-      <datalist  id="clientes">
-        <!-- <select> -->
-          <option  *ngFor="let inventario of datosClientesService.DatosClientes" [value]="inventario.nombre"></option>  
-        <!-- </select> -->
-      </datalist>
-    </div>
-  </form>
-<!--   <mat-form-field>
-    <mat-label><i class="fas fa-search"></i>⠀Buscador</mat-label>
-    <input matInput (keyup)="applyFilter($event.target.value)"class="buscador" placeholder="Ej. Cancelado">
-  </mat-form-field> -->
-  <h2>Analisis de Recetas </h2>
-  
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" id="reportes">
-  
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-    <ng-container matColumnDef="nombreCli" >
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombreCli}} </td>
-    </ng-container>  
-          
-    
-    <ng-container matColumnDef="nombreReceta" >
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Receta </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombreReceta}} </td>
-    </ng-container>      
-
-    <ng-container matColumnDef="codReceta" >
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
-      <td mat-cell *matCellDef="let element"> {{element.codReceta}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Ver">
-      <th mat-header-cell *matHeaderCellDef> Ver </th>
-      <td mat-cell *matCellDef="let element"><button class="button ver" (click)="onEdit(element)" (click)="abrirVer()"><i class="fas fa-beer"></i></button></td>
-    </ng-container>
-
-    <ng-container matColumnDef="Editar">
-      <th mat-header-cell *matHeaderCellDef> Editar </th>
-      <td mat-cell *matCellDef="let element"><button class="button editar" (click)="onEdit(element)" (click)="abrirEditar()"><i class="fas fa-edit"></i></button></td>
-    </ng-container>
-
-    <ng-container matColumnDef="eliminar">
-      <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-      <td mat-cell *matCellDef="let element"> <button class="button borrar" (click)="onDelete(element)"><i class="fas fa-trash-alt"></i></button></td>
-    </ng-container>
-  
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<app-sidebar></app-sidebar> <div class="about-section">
+  <h1>Acerca de nosotros</h1>
+  <p>Equiopo Dinamita.</p>
+  <p>Diseños Explosivos.</p>
 </div>
 
-
-
-
-<div class="contenedor animated fadeIn fast" *ngIf="!editarReceta">
-    <div class="form-row">
-      <h2 class="centro">Editar Receta: <a id="inputState" type="text" name="nombreReceta" #name="ngModel" [(ngModel)]="recetasService.selectReceta.nombreReceta">{{recetasService.selectReceta.nombreReceta}}</a></h2>
-      <button class="button x" (click)="editarReceta=!editarReceta"><i class="fas fa-times"></i></button>
+<h2 style="text-align:center">Nuesto Equipo</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="../../../assets/img/Adrian.jpg" style="height: 300px;"alt="Jane" style="width:100%; height:750px;">
+      <div class="container">
+        <h2>Adrian Alphona</h2>
+        <p class="title">Supervisor</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Adrian@example.com</p>
+        <p><button class="button">Contacto</button></p>
+      </div>
     </div>
-    <br>
-    <form #recetasForm="ngForm" (ngSubmit)="onSubmit(recetasForm)">
-      <div class="form-row" >
-        <div class="form-group col-md-2">
-          <label for="inputState">Cliente:</label>
-          <a class="form-control" id="inputState" type="text" name="nombreCli" #name="ngModel" [(ngModel)]="recetasService.selectReceta.nombreCli">{{recetasService.selectReceta.nombreCli}}</a>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputAddress">Codigo de Receta:</label>
-          <input type="text" name="codReceta" #name="ngModel" [(ngModel)]='recetasService.selectReceta.codReceta' class="form-control" id="codReceta" placeholder="">
-        </div>
-      </div>
-
-      <input type="hidden" name="nombreCli" #name="ngModel" [(ngModel)]="recetasService.selectReceta.nombreCli">
-      <div class="form-group col-md-2">
-      <a type="hidden" class="form-control"  name="idCliente" hidden> {{idCliente}}</a>
-    </div>
- 
-    <div class="row form-group col-md-12"> 
-      <div class="form-group col-md-2">
-        <label >Categoría </label>
-      </div>
-      <div class="form-group col-md-6">
-        <label >Nombre</label>
-      </div>
-      <div class="form-group col-md-1">
-        <label >Presentacion</label>
-        </div>
-        <div class="form-group col-md-1">
-          <label >Cant. Oz</label>          
-        </div>
-      <div class="form-group col-md-1">
-        <label >Cant. %</label>
-      </div>
-      
-      <div class="form-group col-md-1">
-        <label >Codigo</label>
-      </div>
-
-
-    </div>
-
-      <div class="row form-group col-md-12" *ngFor="let row of recetasService.selectReceta.ingredientes;let i = index">
-        
-        <div class="form-group col-md-2">
-            <a type="text" class="form-control">{{row[0]}}</a>
-        </div>
-        <div class="form-group col-md-6">
-          <a type="text" class="form-control">{{row[1]}}</a>
-        </div>
-        <div class="form-group col-md-1">
-            <a type="text" class="form-control">{{row[2]}}</a>
-          </div>
-          <div class="form-group col-md-1">
-            <input type="text" class="form-control" placeholder="{{row[4]}}" name="nciselec" [(ngModel)]='nciselec[i]'>
-            
-          </div>
-        <div class="form-group col-md-1">
-          <a type="text" class="form-control">{{row[3]}}</a>
-        </div>
-        
-        <div class="form-group col-md-1">
-          <a type="text" class="form-control">{{row[5]}}</a>
-        </div>
-
-  
-      </div>
-      
-      
-      <div class="form-row">
-        <input type="submit" name="" (click)="resetFormReceta(recetasForm)" value="Reset">
-        <input style="margin-left: 15%;" type="submit" value="Guardar">
-      </div>
-    </form>
   </div>
 
-
-
-  <div class="contenedor animated fadeIn fast" *ngIf="!ver">
-
-    <form #recetasForm="ngForm" (ngSubmit)="onSubmit(recetasForm)">
-      <div class="form-row">
-        <input
-          type="hidden"
-          name="_id"
-          #name="ngModel"
-          [(ngModel)]="recetasService.selectReceta._id"
-        /></div>
-
-        <div class="form-row">
-          <h2 class="centro">Ingredientes de: <a id="inputState" type="text" name="nombreReceta" #name="ngModel" [(ngModel)]="recetasService.selectReceta.nombreReceta">{{recetasService.selectReceta.nombreReceta}}</a></h2>
-          <button class="button x" (click)="ver=!ver"><i class="fas fa-times"></i></button>
-        </div>
-       
-       <br>
-
-       <div class="row form-group col-md-12"> 
-        <div class="form-group col-md-2">
-          <label >Categoría </label>
-        </div>
-        <div class="form-group col-md-6">
-          <label >Nombre</label>
-        </div>
-        <div class="form-group col-md-1">
-          <label >Presentacion</label>
-          </div>
-          <div class="form-group col-md-1">
-            <label >Cant. Oz</label>          
-          </div>
-        <div class="form-group col-md-1">
-          <label >Cant. %</label>
-        </div>
-        
-        <div class="form-group col-md-1">
-          <label >Codigo</label>
-        </div>
-  
-  
+  <div class="column">
+    <div class="card">
+      <img src="../../../assets/img/Melissa.jpg" style="height: 300px;"alt="Mike" style="width:100%; height:750px;">
+      <div class="container">
+        <h2>Melissa Gold</h2>
+        <p class="title">Diseñadora</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Melissa@example.com</p>
+        <p><button class="button">Contacto</button></p>
       </div>
-        <div class="row form-group col-md-12" *ngFor="let row of recetasService.selectReceta.ingredientes;let i = index">
-           
-          <div class="form-group col-md-2">
-            <a type="text" class="form-control">{{row[0]}}</a>
-          </div>
-          <div class="form-group col-md-6">
-            <a type="text" class="form-control">{{row[1]}}</a>
-          </div>
-          <div class="form-group col-md-1">
-            <a type="text" class="form-control">{{row[2]}}</a>
-          </div>
-          <div class="form-group col-md-1">
-            <a type="text" class="form-control">{{row[4]}}</a>
-          </div>
-          <div class="form-group col-md-1">
-            <a type="text" class="form-control">{{row[3]}}</a>
-          </div>
-      
-          <div class="form-group col-md-1">
-            <a type="text" class="form-control">{{row[5]}}</a>
-          </div>
-        </div>
-      </form>
+    </div>
   </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="../../../assets/img/Victor.webp" alt="John" style="width:100%; height:750px;">
+      <div class="container">
+        <h2>Victor Von Doom</h2>
+        <p class="title">Desarrollador</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Victor@example.com</p>
+        <p><button class="button">Contacto</button></p>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<br>
+
+<div class="footer-clean">
+  <footer>
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-sm-4 col-md-3 item">
+                  <h3>Hecho por</h3>
+                  <ul>
+                      <li><a href="#">Adrian Navarro Rivero</a></li>
+                      <li><a href="#">Melissa Vazquez Unzueta</a></li>
+                      <li><a href="#">Victor Sandoval Gaytan</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-4 col-md-3 item">
+                  <h3>About</h3>
+                  <ul>
+                      <li><a href="#">Company</a></li>
+                      <li><a href="#">Team</a></li>
+                      <li><a href="#">Legacy</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-4 col-md-3 item">
+                  <h3>Careers</h3>
+                  <ul>
+                      <li><a href="#">Job openings</a></li>
+                      <li><a href="#">Employee success</a></li>
+                      <li><a href="#">Benefits</a></li>
+                  </ul>
+              </div>
+              <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                  <p class="copyright">Equipo Dinamita © 2021</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+         

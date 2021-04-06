@@ -36,6 +36,8 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 
 //Services
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -58,6 +60,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     VentasComponent,
     DialogComponent,
     ErrorPageComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     MatSnackBarModule,
     MatDialogModule,
     MatButtonModule,
-    ChartsModule
+    ChartsModule,
+    NgbModule
   ],
   providers: [
     AuthGuard,
@@ -84,6 +88,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  exports: [PrincipalComponent],
+  bootstrap: [AppComponent,
+    PrincipalComponent]
 })
 export class AppModule { }
