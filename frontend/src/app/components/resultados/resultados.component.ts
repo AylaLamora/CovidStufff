@@ -5,10 +5,12 @@ import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { ChartOptions, ChartType, ChartDataSets,  } from 'chart.js'; // Librerias de gráfico
 import { Label } from 'ng2-charts';
 
+import { AuthService } from '../../services/auth.service';
 //Services
 import { BebidasService } from '../../services/bebidas.service';
 import { DatosClientesService } from '../../services/clientes.service';
 import { DatosInventarioService } from '../../services/inventario.service';
+import { PermisosService } from '../../services/permisos.service';
 
 //Models
 import { DatosClientes } from '../../../models/clientes';
@@ -25,6 +27,19 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [DatosInventarioService, DatosClientesService, BebidasService],
 })
 export class ResultadosComponent implements OnInit {
+   /*Cambiar color del fondo*/
+   bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
+   htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
+ 
+   permiso:boolean;
+   usuarios:any = [];
+   usuariosParche:any = [];
+ 
+   permisoUsuario = {
+     email:null,
+     permisos:null
+ }
+ 
 
   // INICIO :grafico
   public barChartOptions: ChartOptions = {
@@ -106,12 +121,35 @@ export class ResultadosComponent implements OnInit {
   // FIN : grafico
 
   constructor(
+    
+    private authService: AuthService,
+    private users:PermisosService,
     private router: Router,
     private _snackBar: MatSnackBar,
     private dialogo: MatDialog
   ) {}
 
   ngOnInit() {
+    this.permisoUsuario.email = this.authService.getUserLoggedIn();
+    this.Verificar();
+     if(!this.permisoUsuario.permisos){
+        //this.logout();
+     }
+  }
+  Verificar(){
+    this.usuarios = this.users.getUsuarios().subscribe(usuarios => { 
+      this.usuariosParche = usuarios;
+      for(let usuario of this.usuariosParche){
+        if(usuario.email == this.permisoUsuario.email){
+          this.permiso = usuario.permisos;
+        }      
+      }
+    })
+  }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 
   openSnackBar(message: string, action?: string) {

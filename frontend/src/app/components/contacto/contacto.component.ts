@@ -36,7 +36,10 @@ import { MatTableDataSource } from '@angular/material/table';
   providers: [DatosInventarioService, DatosClientesService, BebidasService],
 })
 export class ContactoComponent implements OnInit {
-
+   /*Cambiar color del fondo*/
+   bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
+   htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
+ 
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -114,6 +117,9 @@ export class ContactoComponent implements OnInit {
   };
 
   ngOnInit() {
+        /*Cambiar color del fondo*/
+        this.bodyTag.classList.add('login-page');
+        this.htmlTag.classList.add('login-page');
     this.usserLogged = this.authService.getUserLoggedIn();
     this.resetFormInv();
     this.resetFormCliente();

@@ -5,6 +5,7 @@ import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 //Services
+import { PermisosService } from '../../services/permisos.service';
 import { RecetasService } from '../../services/recetas.service';
 import { DatosClientesService } from '../../services/clientes.service';
 import { DatosInventarioService } from '../../services/inventario.service';
@@ -33,11 +34,26 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [DatosClientesService, DatosInventarioService, RecetasService],
 })
 export class EncuestaComponent implements OnInit {
+  bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
+  htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
   sortedData: DatosClientes[];
 
   forma: FormGroup;
 
   editar = true;
+  usuarios: any = [];
+  usserLogged: any;
+
+  permiso: boolean;
+  dia: number;
+  permisoUsuario = {
+    _id: '',
+    fecha: null,
+    changes: null,
+    deletes: null,
+    permisos: null,
+  };
+
 
   nombreReceta: string;
   ingredientes: any[];
@@ -48,6 +64,7 @@ export class EncuestaComponent implements OnInit {
   }
 
   constructor(
+    public users: PermisosService,
     private router: Router,
     public datosClientesService: DatosClientesService,
     public datosInventarioService: DatosInventarioService,
@@ -61,6 +78,9 @@ export class EncuestaComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*Cambiar color del fondo*/
+    this.bodyTag.classList.add('login-page');
+    this.htmlTag.classList.add('login-page');
     this.resetForm();
     this.getAllCliente();
     this.refrescarListaClientes();
@@ -273,7 +293,28 @@ export class EncuestaComponent implements OnInit {
     return this.forma.get('_id');
   }
 
-
+  Verificar() {
+    this.users.getUsuarios().subscribe((usuarios) => {
+      this.usuarios = usuarios;
+      for (let usuario of this.usuarios) {
+        if (usuario.email == this.usserLogged) {
+          this.capturar(
+            usuario.changes,
+            usuario.deletes,
+            usuario._id,
+            usuario.permisos
+          );
+        }
+      }
+    });
+  }
+  capturar(changes, deletes, id, permisos) {
+    this.permisoUsuario._id = id;
+    this.permisoUsuario.changes = changes;
+    this.permisoUsuario.deletes = deletes;
+    this.permisoUsuario.permisos = permisos;
+    //console.log(this.permisoUsuario.permisos);
+  }
 } //CIERRA CLASS ClienteComponent
 
 

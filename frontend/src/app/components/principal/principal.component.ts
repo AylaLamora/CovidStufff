@@ -33,8 +33,14 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PrincipalComponent implements OnInit {
   @ViewChild('ngcarousel', { static: true }) ngCarousel: NgbCarousel;
-
-  ngOnInit() { }
+/*Cambiar color del fondo*/
+bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
+htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
+  ngOnInit() { 
+     /*Cambiar color del fondo*/
+     this.bodyTag.classList.remove('login-page');
+     this.htmlTag.classList.remove('login-page');
+  }
 
   // Move to specific slide
   navigateToSlide(item) {

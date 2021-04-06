@@ -16,6 +16,10 @@ import {NewsFeedService} from './news-feed.service'
   styleUrls: ['./noticias.component.css'],
 })
 export class NoticiasComponent implements OnInit {
+   /*Cambiar color del fondo*/
+   bodyTag: HTMLBodyElement = document.getElementsByTagName('body')[0];
+   htmlTag: HTMLElement = document.getElementsByTagName('html')[0];
+ 
   articles:any
   constructor(
     private newsService:NewsFeedService
@@ -31,6 +35,9 @@ export class NoticiasComponent implements OnInit {
     })
   }
   ngOnInit() {
+    /*Cambiar color del fondo*/
+    this.bodyTag.classList.add('login-page');
+    this.htmlTag.classList.add('login-page');
   }
 
 } //AQUI CIERRA TODO
