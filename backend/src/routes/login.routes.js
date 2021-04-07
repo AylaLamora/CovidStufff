@@ -7,11 +7,12 @@ let ObjectId = require('mongoose').Types.ObjectId;
 
 router.post('/signup', async(req, res) => {
 
-    const { email, password } = req.body;
+    const { email, password, permisos } = req.body;
     
     const newUser = new usuarios ({
     email,
     password: bcryptjs.hashSync(password, 10),
+    permisos
     });
 
     await newUser.save(function(err) {

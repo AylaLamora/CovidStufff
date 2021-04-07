@@ -31,15 +31,18 @@ export class SidebarComponent implements OnInit {
   }
 
    
-   Verificar(){
-    this.usuarios = this.users.getUsuarios().subscribe(usuarios => { 
+   Verificar() {
+    this.usuarios = this.users.getUsuarios().subscribe((usuarios) => {
       this.usuariosParche = usuarios;
-      for(let usuario of this.usuariosParche){
-        if(usuario.email == this.permisoUsuario.email){
-          this.permiso = usuario.permisos;
-        }      
+      for (let usuario of this.usuariosParche) {        
+        if (usuario.email == this.permisoUsuario.email) {
+          this.permisoUsuario.permisos=usuario.permisos;
+     if(!this.permisoUsuario.permisos){
+        this.logout();
+     }
+        }
       }
-    })
+    });
   }
   
   logout() {

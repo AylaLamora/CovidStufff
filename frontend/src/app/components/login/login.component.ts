@@ -69,25 +69,24 @@ export class LoginComponent implements OnInit {
       this.usuariosParche = usuarios;
       for (let usuario of this.usuariosParche) {
         if (usuario.email == this.user.email) {
-          this.capturarDatosUsuario(usuario._id, usuario.changes, usuario.fecha, usuario.deletes);
+          this.capturarDatosUsuario(usuario._id, usuario.changes, usuario.fecha, usuario.deletes, usuario.permisos);
         }
       }
     });
   }
 
-  capturarDatosUsuario(id, changes, dia, deletes) {
+  capturarDatosUsuario(id, changes, dia, deletes, permits) {
     this.permisoUsuario.id = id;
     this.permisoUsuario.changes = changes;
     this.permisoUsuario.deletes = deletes;
+    this.permisoUsuario.permisos=permits;
 
     let diaUser = (this.permisoUsuario.fecha = dia);
 
-    if (this.word == '123456seven') {
+    if (this.permisoUsuario.permisos) {
       this.openSnackBar('Iniciaste sesion como Administrador','End');
-      this.permisoUsuario.permisos = true;
     }else{
       this.openSnackBar('Iniciaste sesion como usuario Comun','End');
-      this.permisoUsuario.permisos = false;
     }
 
     if (diaUser != this.diaActual) {

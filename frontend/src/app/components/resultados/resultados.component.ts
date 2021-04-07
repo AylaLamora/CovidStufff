@@ -34,7 +34,11 @@ export class ResultadosComponent implements OnInit {
    permiso:boolean;
    usuarios:any = [];
    usuariosParche:any = [];
- 
+   user = {
+    email: '',
+    password: '',
+    permisos: null,
+  };
    permisoUsuario = {
      email:null,
      permisos:null
@@ -132,19 +136,20 @@ export class ResultadosComponent implements OnInit {
   ngOnInit() {
     this.permisoUsuario.email = this.authService.getUserLoggedIn();
     this.Verificar();
-     if(!this.permisoUsuario.permisos){
-        //this.logout();
-     }
+    
   }
-  Verificar(){
-    this.usuarios = this.users.getUsuarios().subscribe(usuarios => { 
+  Verificar() {
+    this.usuarios = this.users.getUsuarios().subscribe((usuarios) => {
       this.usuariosParche = usuarios;
-      for(let usuario of this.usuariosParche){
-        if(usuario.email == this.permisoUsuario.email){
-          this.permiso = usuario.permisos;
-        }      
+      for (let usuario of this.usuariosParche) {        
+        if (usuario.email == this.permisoUsuario.email) {
+          console.log(usuario.permisos)
+          this.permisoUsuario.permisos=usuario.permisos;
+          this.permiso=usuario.permisos
+     
+        }
       }
-    })
+    });
   }
   logout() {
     localStorage.removeItem('token');

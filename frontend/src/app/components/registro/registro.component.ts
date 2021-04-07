@@ -29,6 +29,8 @@ export class RegistroComponent implements OnInit {
       [ Validators.required, Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$'),]),
       confirmpassword: new FormControl('', 
       [ Validators.required,Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$'),]),
+      admin:new FormControl(''),
+      permisos:new FormControl(false)
     });
   }
 
@@ -51,10 +53,17 @@ export class RegistroComponent implements OnInit {
   }
 
   signUp() {
+    if(this.registroForm.controls['admin'].value=='123456seven'){
+    this.registroForm.patchValue({
+      permisos:true
+    })}
+
     if (this.registroForm.valid) {
+      console.log(this.registroForm.value)
       if (this.password.value == this.confirmpassword.value) {
         this.authService.signUp(this.registroForm.value).subscribe(
           (res) => {
+            console.log(this.registroForm.value)
             // localStorage.setItem('token', res.token);
             this.router.navigate(['/login']);
           },
@@ -76,7 +85,6 @@ export class RegistroComponent implements OnInit {
     this.flag = monstrar;
     this.contrasena = (this.flag == true) ? 'text':'password'
 }
-
   get email() {
     return this.registroForm.get('email');
   }

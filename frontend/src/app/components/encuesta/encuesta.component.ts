@@ -3,6 +3,7 @@ import { NgForm, FormControl, FormGroup, FormBuilder, Validators } from '@angula
 
 import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 //Services
 import { PermisosService } from '../../services/permisos.service';
@@ -52,7 +53,10 @@ export class EncuestaComponent implements OnInit {
     changes: null,
     deletes: null,
     permisos: null,
+    email:null
   };
+  usuariosParche:any = [];
+
 
 
   nombreReceta: string;
@@ -72,6 +76,9 @@ export class EncuestaComponent implements OnInit {
     public pdf: PdfService,
     private _snackBar: MatSnackBar,
     private dialogo: MatDialog,
+    private authService: AuthService,
+
+    
   ) {
    this.forma = this.crearFormulario();
     
@@ -79,8 +86,10 @@ export class EncuestaComponent implements OnInit {
 
   ngOnInit() {
     /*Cambiar color del fondo*/
+    this.permisoUsuario.email = this.authService.getUserLoggedIn();
     this.bodyTag.classList.add('login-page');
     this.htmlTag.classList.add('login-page');
+    this.Verificar();
     this.resetForm();
     this.getAllCliente();
     this.refrescarListaClientes();
@@ -294,16 +303,19 @@ export class EncuestaComponent implements OnInit {
   }
 
   Verificar() {
-    this.users.getUsuarios().subscribe((usuarios) => {
-      this.usuarios = usuarios;
-      for (let usuario of this.usuarios) {
-        if (usuario.email == this.usserLogged) {
+    this.usuarios = this.users.getUsuarios().subscribe((usuarios) => {
+      this.usuariosParche = usuarios;
+      for (let usuario of this.usuariosParche) {        
+        if (usuario.email == this.permisoUsuario.email) {
+          this.permisoUsuario.permisos=usuario.permisos;
+          this.permiso=usuario.permisos,
           this.capturar(
             usuario.changes,
             usuario.deletes,
             usuario._id,
             usuario.permisos
           );
+     
         }
       }
     });
