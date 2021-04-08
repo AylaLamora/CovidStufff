@@ -5,17 +5,10 @@ import { Component, Input, OnInit, Inject, ViewChild } from '@angular/core';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 //Services
-import { RecetasService } from '../../services/recetas.service';
-import { DatosClientesService } from '../../services/clientes.service';
-import { DatosInventarioService } from '../../services/inventario.service';
 
 // Models
-import { DatosRecetas } from '../../../models/recetas';
-import { DatosClientes } from '../../../models/clientes';
-import { DatosInventario } from '../../../models/inventario';
 
 //Módulos necesarios para generación del PDF
-import { PdfService } from '../../services/sub-services/pdf.service';
 
 // Material
 import { Sort } from '@angular/material/sort';
@@ -29,7 +22,7 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-principal',
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.css'],
-  providers: [DatosClientesService, DatosInventarioService, RecetasService],
+  providers: [ ],
 })
 export class PrincipalComponent implements OnInit {
   @ViewChild('ngcarousel', { static: true }) ngCarousel: NgbCarousel;

@@ -29,8 +29,6 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { AcercaComponent } from './components/acerca/acerca.component';
 import { NoticiasComponent } from './components/noticias/noticias.component';
-import { BebidasComponent } from './components/bebidas/bebidas.component';
-import { VentasComponent } from './components/ventas/ventas.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 
@@ -56,8 +54,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NoticiasComponent,
     FilterPipe,
     AcercaComponent,
-    BebidasComponent,
-    VentasComponent,
     DialogComponent,
     ErrorPageComponent,
     FooterComponent,

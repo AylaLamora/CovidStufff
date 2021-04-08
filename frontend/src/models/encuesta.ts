@@ -1,0 +1,20 @@
+export class Encuesta{
+    _id         : string;
+    nombre      : String;
+    sexo        : String;
+    direccion   : String;
+    estadocivil : String;
+    salud       : String;
+    edad        : String;
+    date        : String;
+    diabetes    : String;
+    hiper       : String;
+    asma        : String;
+    cardiaco    : String;
+    tos         : String;
+    cabeza      : String;
+    olfato      : String;
+    garganta    : String;
+    muscular    : String;
+    gusto       : String;
+}

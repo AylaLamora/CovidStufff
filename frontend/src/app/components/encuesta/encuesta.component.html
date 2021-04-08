@@ -14,26 +14,24 @@
              id="nombre" 
              placeholder="Pepe"
              formControlName="nombre"
-             [class.is-invalid]="nombreNoValido" 
              >
-      <small *ngIf="nombreNoValido" class="text-danger">Se requiere el nombre</small>
 
     </div>
     <div class="form-group col-md-3">
       
-      <input type="radio"
-             class="form-control"
-             id="sexo"
-             formControlName="sexo" checked
-             ><label for="sexo" >Hombre:</label></div>
-             <div class="form-group col-md-3">
-             <input type="radio"
+      <label for="sexo">Genero:</label> 
+      <select 
              class="form-control"
              id="sexo"
              formControlName="sexo"
-             ><label for="sexo" >Mujer:</label>
+             >
+            <option value="Hombre" selected>Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Otro">Otro</option>
+          </select>
 
     </div>
+
 
     
 
@@ -43,25 +41,22 @@
              class="form-control"
              placeholder="Ejem: Calle del rio #123" 
              id="direccion"
-             formControlName="direccion"
-             [class.is-invalid]="direccionNoValido" 
+             formControlName="direccion" 
              >
-      <small *ngIf="direccionNoValido" class="text-danger">Se requiere la dirección</small>
 
     </div>
     <div class="form-group col-md-3">
       
-      <input type="radio"
-             class="form-control"
-             id="estadocivil"
-             formControlName="estadocivil" checked
-             ><label for="direccion" >Casado:</label></div>
-             <div class="form-group col-md-3">
-             <input type="radio"
+      <label for="estadocivil" >Estado Civil:</label> 
+      <select 
              class="form-control"
              id="estadocivil"
              formControlName="estadocivil"
-             ><label for="direccion" >Soltero:</label>
+             >
+            <option value="Casado">Casado</option>
+            <option value="Soltero" selected>Soltero</option>
+            <option value="Divorciado">Divorciado</option>
+          </select>
 
     </div>
     <div class="form-group col-md-6">
@@ -71,11 +66,10 @@
              id="salud"
              formControlName="salud"
              >
-            <option value=0>Buena</option>
-            <option value=1>Regular</option>
-            <option value=2>Mala</option>
+            <option value="Buena" selected>Buena</option>
+            <option value="Regular">Regular</option>
+            <option value="Mala">Mala</option>
           </select>
-      <small *ngIf="direccionNoValido" class="text-danger">Se requiere la dirección</small>
 
     </div>
     <div class="form-group col-md-6">
@@ -89,11 +83,10 @@
     </div>
     <div class="form-group col-md-12">
       <label for="fecha" >Fecha:</label>
-      <input type="date"
-             class="form-control"
-             id="fecha"
-             formControlName="fecha"
-             disabled>
+      <label type="date"
+              class="form-control"
+             id="date"
+             disabled>{{this.fecha}}</label>
     </div>
     <div class="form-group col-md-12">
       <label for="condiciones" >Condiciones Pre-existentes:</label>
@@ -102,31 +95,35 @@
     <div class="form-group col-md-2">
       <label for="condiciones" >Diabetes</label>
       <input type="checkbox"
-             class="form-control"
+            class="form-check-input"
+            class="form-check"
              id="diabetes"
              formControlName="diabetes"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="Hiper" >Hiper tension</label>
+      <label for="hiper" >Hiper tension</label>
       <input type="checkbox"
-             class="form-control"
-             id="Hiper"
-             formControlName="Hiper"
+            class="form-check-input"
+            class="form-check" 
+             id="hiper"
+             formControlName="hiper"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="Asma" >Asma</label>
+      <label for="asma" >Asma</label> 
       <input type="checkbox"
-             class="form-control"
-             id="Asma"
-             formControlName="Asma"
+            class="form-check-input"
+            class="form-check"  
+             id="asma"
+             formControlName="asma"
              >
     </div>
     <div class="form-group col-md-2">
       <label for="cardiaco" >Mal cardiaco</label>
       <input type="checkbox"
-             class="form-control"
+            class="form-check-input"
+            class="form-check" 
              id="cardiaco"
              formControlName="cardiaco"
              >
@@ -136,70 +133,75 @@
       
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Tos seca</label>
+      <label for="tos" >Tos seca</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+      class="form-check-input"
+      class="form-check"              
+             id="tos"
+             formControlName="tos"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Dolor de cabeza</label>
+      <label for="cabeza" >Dolor de cabeza</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+            class="form-check-input"
+            class="form-check"  
+             id="cabeza"
+             formControlName="cabeza"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Falta de olfato</label>
+      <label for="olfato" >Falta de olfato</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+      class="form-check-input"
+      class="form-check" 
+              
+             id="olfato"
+             formControlName="olfato"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Dolor de garganta</label>
+      <label for="garganta" >Dolor de garganta</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+      class="form-check-input"
+      class="form-check" 
+             id="garganta"
+             formControlName="garganta"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Dolor Muscular</label>
+      <label for="muscular" >Dolor Muscular</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+      class="form-check-input"
+      class="form-check" 
+             id="muscular"
+             formControlName="muscular"
              >
     </div>
     <div class="form-group col-md-2">
-      <label for="cardiaco" >Perdida del gusto</label>
+      <label for="gusto" >Perdida del gusto</label>
       <input type="checkbox"
-             class="form-control"
-             id="cardiaco"
-             formControlName="cardiaco"
+      class="form-check-input"
+      class="form-check" 
+             id="gusto"
+             formControlName="gusto"
              >
     </div>
 
-
-    
-
-  </div>
 
     <div class="form-row centro">
-    <button type="button" class=" reset" (click)="resetForm()" value="Reset">Reset</button>
-    <button style="margin-left: 15%;"
-            type="submit"
-            class="reset"
-            [disabled]="!forma.valid"
-            [class.opaco]="!forma.valid">Guardar</button>
-    </div>
+      <button style="margin-left: 15%;"
+              type="submit"
+              class="reset"
+              [disabled]="!forma.valid"
+              [class.opaco]="!forma.valid">Guardar</button>
+      </div>
+
+  </div>
   </form>
 
-</div> 
+    
+  </div> 
 <br>
 
 

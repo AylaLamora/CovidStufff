@@ -14,10 +14,8 @@ app.use(express.urlencoded({ extended: true })); // parse application/x-www-form
 
 // Rutas
 app.use('/api', require('./routes/login.routes'));
-app.use('/clientes', require('./controllers/clientes'));
-app.use('/inventario', require('./controllers/inventario'));
-app.use('/recetas', require('./controllers/recetas'));
-app.use('/bebidas', require('./controllers/bebidas'));
+//app.use('/bebidas', require('./controllers/bebidas'));
+app.use('/encuesta', require('./controllers/encuesta'));
 
 // Servidor
 app.listen(PORT, () => console.log(`Escuchando por el puerto ${PORT}`) );

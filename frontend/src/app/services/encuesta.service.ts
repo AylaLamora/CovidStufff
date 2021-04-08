@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DatosBebidas } from '../../models/bebidas';
+import { Encuesta } from '../../models/encuesta';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BebidasService {
-  readonly URL = 'http://localhost:3501/bebidas';
+export class EncuestaService {
+  readonly URL = 'http://localhost:3501/encuesta';
 
   // URL_SERVIDOR
   // readonly URL = 'https://bar-sandbox.herokuapp.com/bebidas';
 
   info: any = [];
 
-  selectBebida: DatosBebidas;
-  DatosBebidas: DatosBebidas[];
+  selectBebida: Encuesta;
+  DatosBebidas: Encuesta[];
 
   constructor(private http: HttpClient) {
     this.http.get(this.URL).subscribe((resp: any) => {
@@ -30,8 +30,8 @@ export class BebidasService {
     return this.http.get(this.URL);
   }
 
-  putDatos(beb: DatosBebidas) {
-    return this.http.put(this.URL + `/${beb._id}`, beb);
+  putDatos(enc: Encuesta) {
+    return this.http.put(this.URL + `/${enc._id}`, enc);
   }
   deleteDato(_id: string) {
     return this.http.delete(this.URL + `/${_id}`);

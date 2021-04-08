@@ -7,14 +7,9 @@ import { Label } from 'ng2-charts';
 
 import { AuthService } from '../../services/auth.service';
 //Services
-import { BebidasService } from '../../services/bebidas.service';
-import { DatosClientesService } from '../../services/clientes.service';
-import { DatosInventarioService } from '../../services/inventario.service';
 import { PermisosService } from '../../services/permisos.service';
 
 //Models
-import { DatosClientes } from '../../../models/clientes';
-import { DatosInventario } from '../../../models/inventario';
 
 //Material
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.css'],
-  providers: [DatosInventarioService, DatosClientesService, BebidasService],
+  providers: [],
 })
 export class ResultadosComponent implements OnInit {
    /*Cambiar color del fondo*/

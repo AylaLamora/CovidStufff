@@ -10,8 +10,6 @@ import { ResultadosComponent } from './components/resultados/resultados.componen
 import { AcercaComponent }     from './components/acerca/acerca.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NoticiasComponent } from './components/noticias/noticias.component';
-import { BebidasComponent } from './components/bebidas/bebidas.component';
-import { VentasComponent } from './components/ventas/ventas.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 // Seguridad
@@ -28,8 +26,6 @@ const routes: Routes = [
   {path: 'contacto',component: ContactoComponent,canActivate:[AuthGuard] },
   {path: 'acerca',component: AcercaComponent,canActivate:[AuthGuard] },
   {path: 'resultados',component:  ResultadosComponent,canActivate:[AuthGuard] },
-  {path: 'bebidas',component:  BebidasComponent,canActivate:[AuthGuard] },
-  {path: 'ventas',component:  VentasComponent,canActivate:[AuthGuard] },
   {path: '', pathMatch:'full', redirectTo:'login' },
   {path: '**',  pathMatch:'full', redirectTo:'error'},
 
