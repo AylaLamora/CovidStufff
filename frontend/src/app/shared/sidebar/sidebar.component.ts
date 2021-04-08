@@ -37,9 +37,7 @@ export class SidebarComponent implements OnInit {
       for (let usuario of this.usuariosParche) {        
         if (usuario.email == this.permisoUsuario.email) {
           this.permisoUsuario.permisos=usuario.permisos;
-     if(!this.permisoUsuario.permisos){
-        this.logout();
-     }
+     
         }
       }
     });
